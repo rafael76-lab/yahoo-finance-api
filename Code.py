@@ -51,10 +51,10 @@ fig = px.line(
     DF,
     x="Date",
     y="Adj Close",
-    title="Apple (AAPL) – Precio Ajustado (Estilo Futurista)",
+    title="Apple (AAPL) – Precio Ajustado",
     labels={
         "Date": "Fecha",
-        "Adj Close": "Precio Ajustado (USD)"
+        "Adj Close": "Precio Ajustado"
     }
 )
 
