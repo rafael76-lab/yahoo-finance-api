@@ -3,10 +3,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import plotly.express as px
 import streamlit as st
-
-# -----------------------------
-# Estilo futurista para Streamlit
-# -----------------------------
+st.set_page_config(page_title="Apple stock price")
 st.markdown("""
     <style>
         body {
@@ -20,9 +17,6 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
-# -----------------------------
-# Descargar datos
-# -----------------------------
 end = datetime.now()
 start = end - timedelta(days=365)
 
@@ -40,10 +34,6 @@ if isinstance(df_apple.columns, pd.MultiIndex):
     df_apple.columns = df_apple.columns.get_level_values(0)
 
 DF = df_apple[["Date", "Adj Close"]].copy()
-
-# -----------------------------
-# Gráfica interactiva futurista
-# -----------------------------
 fig = px.line(
     DF,
     x="Date",
