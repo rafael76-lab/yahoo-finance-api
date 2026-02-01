@@ -3,7 +3,11 @@ import pandas as pd
 from datetime import datetime, timedelta
 import plotly.express as px
 import streamlit as st
-st.header("")
+st.markdown(
+    "<h2 style='color:#00eaff; text-align:center; margin-top:0;'>Apple (AAPL) – Precio Ajustado</h2>",
+    unsafe_allow_html=True
+)
+
 st.markdown("""
     <style>
         body {
@@ -49,22 +53,22 @@ fig.update_layout(
     template="plotly_dark",
     hovermode="x unified",
     title_x=0.5,
-    plot_bgcolor="#000000",
-    paper_bgcolor="#000000",
-    font=dict(color="#00eaff", size=14),
-    title_font=dict(color="#00eaff", size=22),
+    plot_bgcolor"#000000",
+    paper_bgcolor"#000000",
+    font=dict(color"#00eaff", size=14),
+    title_font=dict(color"#00eaff", size=22),
     xaxis=dict(
-        gridcolor="#222222",
-        zerolinecolor="#333333"
+        gridcolor"#222222",
+        zerolinecolor"#333333"
     ),
     yaxis=dict(
-        gridcolor="#222222",
-        zerolinecolor="#333333"
+        gridcolor"#222222",
+        zerolinecolor"#333333"
     )
 )
 
 fig.update_traces(
-    line=dict(width=4, color="#00eaff"),
+    line=dict(width=4, color"#00eaff"),
     hovertemplate="Fecha: %{x}<br>Precio: $%{y:.2f}<extra></extra>"
 )
 
