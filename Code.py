@@ -20,9 +20,6 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
-
-st.header('Gráfico de precios ajustados del último año de Apple (AAPL)')
-
 # -----------------------------
 # Descargar datos
 # -----------------------------
