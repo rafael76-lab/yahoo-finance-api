@@ -2,6 +2,9 @@ import yfinance as yf
 import pandas as pd
 from datetime import datetime, timedelta
 import plotly.express as px
+import streamlit as st
+
+st.header('Gráfico interactivo de precios ajustados del último año de Apple (AAPL)')
 
 # -----------------------------
 # Descargar datos
@@ -52,4 +55,5 @@ fig.update_traces(
     hovertemplate="Fecha: %{x}<br>Precio: $%{y:.2f}<extra></extra>"
 )
 
-fig.show()
+# 🔥 ESTA ES LA LÍNEA CORRECTA PARA STREAMLIT
+st.plotly_chart(fig, use_container_width=True)
