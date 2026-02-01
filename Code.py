@@ -4,10 +4,6 @@ from datetime import datetime, timedelta
 import plotly.express as px
 import streamlit as st
 
-# Título en la app
-st.header("Precio Ajustado de Apple (AAPL)")
-
-# Estilo personalizado
 st.markdown(
     """
     <style>
@@ -19,11 +15,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Definir rango de fechas
 end = datetime.now()
 start = end - timedelta(days=365)
 
-# Descargar datos de Apple
 df_apple = yf.download(
     "AAPL",
     start=start,
@@ -32,26 +26,26 @@ df_apple = yf.download(
     auto_adjust=False
 )
 
-# Reset index
+
 df_apple = df_apple.reset_index()
 
-# Corregir MultiIndex si existe
+
 if isinstance(df_apple.columns, pd.MultiIndex):
     df_apple.columns = df_apple.columns.get_level_values(0)
 
-# Seleccionar columnas necesarias
+
 DF = df_apple[["Date", "Adj Close"]].copy()
 
-# Crear gráfico con Plotly
+
 fig = px.line(
     DF,
     x="Date",
     y="Adj Close",
-    title="Apple (AAPL) – Precio Ajustado",
+    title="AAPL",
     labels={"Date": "Fecha", "Adj Close": "Precio Ajustado"}
 )
 
-# Personalizar layout
+
 fig.update_layout(
     template="plotly_dark",
     hovermode="x unified",
@@ -64,11 +58,11 @@ fig.update_layout(
     yaxis=dict(gridcolor="#222222", zerolinecolor="#333333")
 )
 
-# Personalizar línea
+
 fig.update_traces(
     line=dict(width=4, color="#00eaff"),
     hovertemplate="Fecha: %{x}<br>Precio: $%{y:.2f}<extra></extra>"
 )
 
-# Mostrar gráfico en Streamlit
+
 st.plotly_chart(fig, use_container_width=True)
