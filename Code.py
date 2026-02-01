@@ -4,7 +4,24 @@ from datetime import datetime, timedelta
 import plotly.express as px
 import streamlit as st
 
-st.header('Gráfico interactivo de precios ajustados del último año de Apple (AAPL)')
+# -----------------------------
+# Estilo futurista para Streamlit
+# -----------------------------
+st.markdown("""
+    <style>
+        body {
+            background-color: #000000;
+        }
+        .stApp {
+            background-color: #000000;
+        }
+        h1, h2, h3, h4, h5, h6, p, label {
+            color: #00eaff !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+st.header('⚡ Gráfico futurista de precios ajustados del último año de Apple (AAPL)')
 
 # -----------------------------
 # Descargar datos
@@ -20,24 +37,21 @@ df_apple = yf.download(
     auto_adjust=False
 )
 
-# Reset index
 df_apple = df_apple.reset_index()
 
-# 🔧 Aplanar columnas si vienen como MultiIndex
 if isinstance(df_apple.columns, pd.MultiIndex):
     df_apple.columns = df_apple.columns.get_level_values(0)
 
-# Selección segura de columnas
 DF = df_apple[["Date", "Adj Close"]].copy()
 
 # -----------------------------
-# Gráfica interactiva
+# Gráfica interactiva futurista
 # -----------------------------
 fig = px.line(
     DF,
     x="Date",
     y="Adj Close",
-    title="Apple (AAPL) – Adjusted Close Price (Último año)",
+    title="Apple (AAPL) – Precio Ajustado (Estilo Futurista)",
     labels={
         "Date": "Fecha",
         "Adj Close": "Precio Ajustado (USD)"
@@ -47,13 +61,24 @@ fig = px.line(
 fig.update_layout(
     template="plotly_dark",
     hovermode="x unified",
-    title_x=0.5
+    title_x=0.5,
+    plot_bgcolor="#000000",
+    paper_bgcolor="#000000",
+    font=dict(color="#00eaff", size=14),
+    title_font=dict(color="#00eaff", size=22),
+    xaxis=dict(
+        gridcolor="#222222",
+        zerolinecolor="#333333"
+    ),
+    yaxis=dict(
+        gridcolor="#222222",
+        zerolinecolor="#333333"
+    )
 )
 
 fig.update_traces(
-    line=dict(width=3),
+    line=dict(width=4, color="#00eaff"),
     hovertemplate="Fecha: %{x}<br>Precio: $%{y:.2f}<extra></extra>"
 )
 
-# 🔥 ESTA ES LA LÍNEA CORRECTA PARA STREAMLIT
 st.plotly_chart(fig, use_container_width=True)
